@@ -1,50 +1,129 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------------- */
+/*  Theme tokens — single source of truth for colors.                        */
+/*                                                                            */
+/*  Components must never reference raw hex values. Use the semantic         */
+/*  utilities Tailwind generates from these tokens:                          */
+/*                                                                            */
+/*    Surfaces        bg-canvas, bg-surface, bg-surface-raised, bg-overlay   */
+/*    Text            text-primary, text-secondary, text-tertiary,           */
+/*                    text-inverse                                            */
+/*    Borders         border-subtle, border-default, border-strong           */
+/*    Brand           bg-accent, text-accent, bg-accent-soft                 */
+/*    Status          text-positive, text-negative, bg-positive-soft,        */
+/*                    bg-negative-soft, text-warning                         */
+/*                                                                            */
+/*  Adding a token? Add it here AND to both `:root` (light) and `.dark`.     */
+/* ------------------------------------------------------------------------- */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-overlay: var(--overlay);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-inverse: var(--text-inverse);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-positive: var(--positive);
+  --color-positive-soft: var(--positive-soft);
+  --color-negative: var(--negative);
+  --color-negative-soft: var(--negative-soft);
+  --color-warning: var(--warning);
+
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Make `dark:` utilities respond to the `.dark` class instead of the OS
+   media query, since we own theme toggling. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  /* Light theme — default. */
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    --canvas: #fafafa;
+    --surface: #ffffff;
+    --surface-raised: #ffffff;
+    --overlay: rgba(15, 15, 17, 0.04);
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+    --text-primary: #0a0a0a;
+    --text-secondary: #525252;
+    --text-tertiary: #a3a3a3;
+    --text-inverse: #ffffff;
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
+    --border-subtle: #ececec;
+    --border-default: #d4d4d4;
+    --border-strong: #a3a3a3;
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+    --accent: #ea580c;
+    --accent-hover: #c2410c;
+    --accent-soft: rgba(234, 88, 12, 0.1);
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.imgDark {
-  display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+    --positive: #15803d;
+    --positive-soft: rgba(21, 128, 61, 0.12);
+    --negative: #dc2626;
+    --negative-soft: rgba(220, 38, 38, 0.12);
+    --warning: #d97706;
   }
 
-  .imgLight {
+  /* Dark theme. */
+  .dark {
+    --canvas: #09090b;
+    --surface: #111114;
+    --surface-raised: #17171c;
+    --overlay: rgba(255, 255, 255, 0.04);
+
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #52525b;
+    --text-inverse: #09090b;
+
+    --border-subtle: #1d1d20;
+    --border-default: #2a2a2e;
+    --border-strong: #52525b;
+
+    --accent: #f97316;
+    --accent-hover: #fb923c;
+    --accent-soft: rgba(249, 115, 22, 0.15);
+
+    --positive: #22c55e;
+    --positive-soft: rgba(34, 197, 94, 0.15);
+    --negative: #ef4444;
+    --negative-soft: rgba(239, 68, 68, 0.15);
+    --warning: #f59e0b;
+  }
+
+  html,
+  body {
+    background-color: var(--canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    /* Smooth color transitions when toggling themes. */
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  /* Tabular figures for prices so digits don't shift width as they change. */
+  .num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  /* Hide scrollbars on horizontal scroll containers (top movers ticker). */
+  .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  .imgDark {
-    display: unset;
+  .no-scrollbar {
+    scrollbar-width: none;
   }
 }
