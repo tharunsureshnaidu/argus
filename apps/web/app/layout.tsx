@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Sextant — crypto market navigation",
+  title: "Argus",
   description:
     "Read the signals, decide for yourself. Prices, news, and indicators in one place — without the predictions.",
 };
