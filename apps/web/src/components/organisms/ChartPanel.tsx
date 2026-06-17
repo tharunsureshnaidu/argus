@@ -10,6 +10,7 @@ import {
   type ISeriesApi,
   type UTCTimestamp,
 } from "lightweight-charts";
+import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 
 import { Card } from "@/components/atoms/Card";
 import { Skeleton } from "@/components/atoms/Skeleton";
@@ -457,8 +458,9 @@ function ChartNewsMarker({
             +{count - 1} more {count - 1 === 1 ? "story" : "stories"} here
           </span>
         ) : null}
-        <span className="mt-2 block text-[11px] font-medium text-accent">
-          Click to read →
+        <span className="mt-2 flex items-center gap-1 text-[11px] font-medium text-accent">
+          Click to read
+          <ArrowRight className="h-3 w-3" aria-hidden />
         </span>
       </span>
 
@@ -472,7 +474,11 @@ function ChartNewsMarker({
             : "border-negative/40 bg-negative/15 text-negative",
         )}
       >
-        <Chevron up={up} />
+        {up ? (
+          <ChevronUp className="h-3 w-3" strokeWidth={3} aria-hidden />
+        ) : (
+          <ChevronDown className="h-3 w-3" strokeWidth={3} aria-hidden />
+        )}
         {count > 1 ? (
           <span className="absolute -right-1.5 -top-1.5 grid h-3.5 min-w-3.5 place-items-center rounded-full bg-accent px-0.5 text-[9px] font-semibold text-text-inverse">
             {count}
@@ -480,24 +486,6 @@ function ChartNewsMarker({
         ) : null}
       </span>
     </button>
-  );
-}
-
-function Chevron({ up }: { up: boolean }) {
-  return (
-    <svg
-      width="11"
-      height="11"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {up ? <path d="m6 14 6-6 6 6" /> : <path d="m6 10 6 6 6-6" />}
-    </svg>
   );
 }
 

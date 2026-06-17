@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowDown, Search } from "lucide-react";
 
 import { Button } from "@/components/atoms/Button";
 import { Kbd } from "@/components/atoms/Kbd";
@@ -52,7 +53,7 @@ export function HomeHero() {
 
       <motion.div variants={fadeRise} className="flex flex-wrap items-center gap-3">
         <Button size="lg" onClick={palette.open}>
-          <SearchGlyph />
+          <Search className="h-4 w-4" aria-hidden />
           Search a coin
           <span className="ml-1 hidden items-center gap-0.5 opacity-80 sm:flex">
             <Kbd className="border-text-inverse/20 bg-black/10 text-text-inverse">
@@ -67,28 +68,10 @@ export function HomeHero() {
           href="#markets"
           className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-border-default bg-surface-raised px-6 text-base font-medium text-text-primary shadow-sm transition-colors hover:border-border-strong hover:bg-overlay focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
-          Explore markets ↓
+          Explore markets
+          <ArrowDown className="h-4 w-4" aria-hidden />
         </a>
       </motion.div>
     </motion.section>
-  );
-}
-
-function SearchGlyph() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <circle cx="11" cy="11" r="7" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
   );
 }

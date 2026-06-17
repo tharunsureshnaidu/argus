@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { LayoutGrid, List, Search } from "lucide-react";
 
 import { Card } from "@/components/atoms/Card";
 import { Input } from "@/components/atoms/Input";
@@ -84,7 +85,7 @@ export function MarketsPanel() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Filter coins…"
             className="sm:max-w-xs"
-            leading={<SearchGlyph />}
+            leading={<Search className="h-4 w-4" aria-hidden />}
           />
           <div className="flex items-center gap-2">
             <Text variant="caption" tone="tertiary" className="hidden sm:inline">
@@ -176,8 +177,16 @@ function ViewToggle({
       value={view}
       onChange={onChange}
       options={[
-        { value: "grid", label: <GridGlyph />, title: "Grid view" },
-        { value: "table", label: <ListGlyph />, title: "Table view" },
+        {
+          value: "grid",
+          label: <LayoutGrid className="h-3.5 w-3.5" aria-hidden />,
+          title: "Grid view",
+        },
+        {
+          value: "table",
+          label: <List className="h-3.5 w-3.5" aria-hidden />,
+          title: "Table view",
+        },
       ]}
     />
   );
@@ -193,49 +202,3 @@ function GridSkeleton() {
   );
 }
 
-function SearchGlyph() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <circle cx="11" cy="11" r="7" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  );
-}
-
-function GridGlyph() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <rect x="3" y="3" width="7" height="7" rx="1.5" />
-      <rect x="14" y="3" width="7" height="7" rx="1.5" />
-      <rect x="3" y="14" width="7" height="7" rx="1.5" />
-      <rect x="14" y="14" width="7" height="7" rx="1.5" />
-    </svg>
-  );
-}
-
-function ListGlyph() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      aria-hidden="true"
-    >
-      <path d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  );
-}

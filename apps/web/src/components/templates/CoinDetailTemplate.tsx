@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
 
 import { Card } from "@/components/atoms/Card";
 import { Text } from "@/components/atoms/Text";
@@ -23,7 +24,7 @@ export function CoinDetailTemplate({ symbol }: { symbol: string }) {
         href="/"
         className="mb-5 inline-flex items-center gap-1.5 text-sm text-text-secondary transition-colors hover:text-text-primary"
       >
-        <span aria-hidden>←</span> All coins
+        <ArrowLeft className="h-4 w-4" aria-hidden /> All coins
       </Link>
 
       {status === "error" && !coin ? (

@@ -12,6 +12,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { ArrowDown, ArrowUp, CornerDownLeft, Search } from "lucide-react";
 
 import { Kbd } from "@/components/atoms/Kbd";
 import { CoinIcon } from "@/components/molecules/CoinIcon";
@@ -188,7 +189,10 @@ function PaletteModal({
           >
             {/* Search field */}
             <div className="flex items-center gap-3 border-b border-border-subtle px-4">
-              <SearchGlyph className="h-4 w-4 shrink-0 text-text-tertiary" />
+              <Search
+                className="h-4 w-4 shrink-0 text-text-tertiary"
+                aria-hidden
+              />
               <input
                 ref={inputRef}
                 value={query}
@@ -242,12 +246,18 @@ function PaletteModal({
             {/* Footer hint */}
             <div className="flex items-center justify-between border-t border-border-subtle px-4 py-2.5 text-xs text-text-tertiary">
               <span className="flex items-center gap-1.5">
-                <Kbd>↑</Kbd>
-                <Kbd>↓</Kbd>
+                <Kbd>
+                  <ArrowUp className="h-3 w-3" aria-hidden />
+                </Kbd>
+                <Kbd>
+                  <ArrowDown className="h-3 w-3" aria-hidden />
+                </Kbd>
                 to navigate
               </span>
               <span className="flex items-center gap-1.5">
-                <Kbd>↵</Kbd>
+                <Kbd>
+                  <CornerDownLeft className="h-3 w-3" aria-hidden />
+                </Kbd>
                 to open
               </span>
             </div>
@@ -258,20 +268,3 @@ function PaletteModal({
   );
 }
 
-function SearchGlyph({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <circle cx="11" cy="11" r="7" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  );
-}
