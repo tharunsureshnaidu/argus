@@ -11,6 +11,18 @@ use sqlx::PgPool;
 use crate::prices::service::Candle;
 use crate::prices::sources::{INTERVALS, PAIRS, Source};
 
+/// Binance market-data host.
+///
+/// The primary `api.binance.com` is geo-blocked from US IPs (e.g. most cloud
+/// regions) and replies with an error *object* instead of the klines *array*,
+/// which fails to decode. The public data mirror `data-api.binance.vision`
+/// serves the identical `/api/v3/klines` endpoint with no key and no geo-block.
+/// Override with `BINANCE_API_BASE` if you self-host somewhere unrestricted.
+fn binance_base() -> String {
+    std::env::var("BINANCE_API_BASE")
+        .unwrap_or_else(|_| "https://data-api.binance.vision".to_string())
+}
+
 /// Raw shape Binance's /klines endpoint returns: a 12-element heterogeneous
 /// array in a fixed order. We only consume the first six fields; the rest
 /// (close time, quote volume, trade count, taker buy stats) are useful for
@@ -88,8 +100,10 @@ async fn fetch_pair(
     interval: &str,
 ) -> Result<Vec<Candle>> {
     let url = format!(
-        "https://api.binance.com/api/v3/klines?symbol={}&interval={}&limit=500",
-        src.binance_pair, interval,
+        "{}/api/v3/klines?symbol={}&interval={}&limit=500",
+        binance_base(),
+        src.binance_pair,
+        interval,
     );
 
     let mut raw: Vec<RawKline> = client.get(&url).send().await?.json().await?;
