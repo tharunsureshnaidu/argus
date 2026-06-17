@@ -9,14 +9,11 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { Badge } from "@/components/atoms/Badge";
 import { Kbd } from "@/components/atoms/Kbd";
-import { Text } from "@/components/atoms/Text";
+import { ArticleContent } from "@/components/molecules/ArticleContent";
 import { timeAgo } from "@/lib/formatters/time";
-import { htmlToText, toParagraphs } from "@/lib/formatters/html";
 import type { Article } from "@/features/news/newsTypes";
 
 interface NewsModalContextValue {
@@ -130,31 +127,7 @@ function ReaderModal({
 
             {/* Body (scrolls if long) */}
             <div className="thin-scrollbar flex-1 overflow-y-auto p-5">
-              <Text as="h2" variant="title" className="text-2xl leading-snug">
-                {htmlToText(article.title) || article.title}
-              </Text>
-
-              <ArticleBody snippet={article.snippet} />
-
-              {article.coins.length > 0 ? (
-                <div className="mt-5">
-                  <Text variant="label" tone="tertiary" className="block">
-                    Mentioned
-                  </Text>
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {article.coins.map((coin) => (
-                      <Link key={coin} href={`/coins/${coin}`} onClick={onClose}>
-                        <Badge
-                          tone="neutral"
-                          className="transition-colors hover:bg-overlay-strong"
-                        >
-                          {coin}
-                        </Badge>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
+              <ArticleContent article={article} onNavigate={onClose} />
             </div>
 
             {/* Footer */}
@@ -176,34 +149,6 @@ function ReaderModal({
         </motion.div>
       ) : null}
     </AnimatePresence>
-  );
-}
-
-function ArticleBody({ snippet }: { snippet: string }) {
-  const paragraphs = toParagraphs(snippet);
-
-  if (paragraphs.length === 0) {
-    return (
-      <Text variant="body" tone="tertiary" className="mt-4 block italic">
-        No preview available — read the full story at the source.
-      </Text>
-    );
-  }
-
-  return (
-    <div className="mt-4 flex flex-col gap-3">
-      {paragraphs.map((p, i) => (
-        <Text
-          key={i}
-          as="p"
-          variant="body"
-          tone="secondary"
-          className="block leading-relaxed"
-        >
-          {p}
-        </Text>
-      ))}
-    </div>
   );
 }
 
