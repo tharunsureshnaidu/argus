@@ -14,12 +14,15 @@ _A thinking tool, not a prediction tool._
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-WIP-yellow)
 
+**[🚀 Live app](https://arguslens.vercel.app/)** · **[⚙️ Live API](https://argus-8oew.onrender.com/health)**
+
 </div>
 
 ---
 
 ## Table of Contents
 
+- [Live demo](#live-demo)
 - [What is Argus?](#what-is-Argus)
 - [Why "Argus"?](#why-Argus)
 - [The honest position on predictions](#the-honest-position-on-predictions)
@@ -35,6 +38,23 @@ _A thinking tool, not a prediction tool._
 - [Contributing](#contributing)
 - [License](#license)
 - [Disclaimer](#disclaimer)
+
+---
+
+## Live demo
+
+|                      | URL                             |
+| -------------------- | ------------------------------- |
+| **Web app** (Vercel) | https://arguslens.vercel.app/   |
+| **API** (Render)     | https://argus-8oew.onrender.com |
+
+> The API runs on a free instance and may cold-start on first request — give it a few seconds to wake up.
+
+```bash
+# Hit the live API directly
+curl -s https://argus-8oew.onrender.com/health
+curl -s "https://argus-8oew.onrender.com/coins" | jq '.[0]'
+```
 
 ---
 
