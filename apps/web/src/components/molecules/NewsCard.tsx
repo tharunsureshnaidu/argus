@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 import { Badge } from "@/components/atoms/Badge";
 import { Card } from "@/components/atoms/Card";
@@ -61,7 +62,7 @@ export function NewsCard({ article, index }: { article: Article; index: number }
           </div>
           <span className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-accent">
             View more
-            <ArrowGlyph />
+            <ArrowRight className="h-3 w-3" aria-hidden />
           </span>
         </div>
       </Card>
@@ -69,20 +70,3 @@ export function NewsCard({ article, index }: { article: Article; index: number }
   );
 }
 
-function ArrowGlyph() {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
-  );
-}

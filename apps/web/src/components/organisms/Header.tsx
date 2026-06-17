@@ -1,5 +1,7 @@
 "use client";
 
+import { Search } from "lucide-react";
+
 import { Kbd } from "@/components/atoms/Kbd";
 import { Logo } from "@/components/atoms/Logo";
 import { ThemeToggle } from "@/components/atoms/ThemeToggle";
@@ -24,7 +26,7 @@ export function Header() {
           className="group flex h-9 w-full max-w-xs items-center gap-2 rounded-lg border border-border-default bg-surface/60 px-3 text-sm text-text-tertiary transition-colors hover:border-border-strong hover:text-text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Search coins"
         >
-          <SearchGlyph className="h-4 w-4 shrink-0" />
+          <Search className="h-4 w-4 shrink-0" aria-hidden />
           <span className="flex-1 text-left">Search coins…</span>
           <span className="hidden items-center gap-0.5 sm:flex">
             <Kbd>⌘</Kbd>
@@ -37,23 +39,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  );
-}
-
-function SearchGlyph({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <circle cx="11" cy="11" r="7" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
   );
 }
