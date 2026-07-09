@@ -422,7 +422,7 @@ cargo clippy -- -D warnings
 docker compose logs -f postgres                                  # tail Postgres logs
 docker compose down                                              # stop services
 docker compose down -v                                           # stop + wipe data
-docker exec -it Argus-pg psql -U Argus -d Argus            # psql shell
+docker exec -it Argus-pg psql -U Argus -d Argus                  # psql shell
 ```
 
 ---
